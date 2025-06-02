@@ -1,4 +1,4 @@
-package com.biblioteca.servico_usuarios;
+package com.biblioteca.servico_usuarios.model;
 
 public class Locatario extends Usuario {
     private float saldoDevedor;

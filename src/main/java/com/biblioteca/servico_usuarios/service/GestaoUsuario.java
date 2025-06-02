@@ -1,6 +1,11 @@
-package com.biblioteca.servico_usuarios;
+package com.biblioteca.servico_usuarios.service;
 
 import org.springframework.stereotype.Service;
+
+import com.biblioteca.servico_usuarios.model.Funcionario;
+import com.biblioteca.servico_usuarios.model.Locatario;
+import com.biblioteca.servico_usuarios.model.Usuario;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

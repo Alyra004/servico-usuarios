@@ -1,9 +1,15 @@
-package com.biblioteca.servico_usuarios;
+package com.biblioteca.servico_usuarios.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.biblioteca.servico_usuarios.model.Funcionario;
+import com.biblioteca.servico_usuarios.model.Locatario;
+import com.biblioteca.servico_usuarios.model.Usuario;
+import com.biblioteca.servico_usuarios.service.GestaoUsuario;
+
 import java.util.List;
 
 @RestController

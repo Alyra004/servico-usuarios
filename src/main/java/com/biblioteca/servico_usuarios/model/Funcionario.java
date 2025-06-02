@@ -1,4 +1,4 @@
-package com.biblioteca.servico_usuarios;
+package com.biblioteca.servico_usuarios.model;
 
 public class Funcionario extends Usuario{
     private String cargo;
