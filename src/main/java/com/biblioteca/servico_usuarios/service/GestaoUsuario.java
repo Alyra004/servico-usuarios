@@ -2,8 +2,6 @@ package com.biblioteca.servico_usuarios.service;
 
 import org.springframework.stereotype.Service;
 
-import com.biblioteca.servico_usuarios.model.Funcionario;
-import com.biblioteca.servico_usuarios.model.Locatario;
 import com.biblioteca.servico_usuarios.model.Usuario;
 
 import java.util.ArrayList;
@@ -15,22 +13,14 @@ public class GestaoUsuario {
 
     private final List<Usuario> usuarios = new ArrayList<>();
 
-
-    public Locatario cadastrarLocatario(Locatario novoLocatario) {
-        if (buscarUsuarioPorId(novoLocatario.getId()).isPresent()) {
+    public Usuario cadastrarUsuario(Usuario novoUsuario) {
+        if(buscarUsuarioPorId(novoUsuario.getId()).isPresent()){
             return null;
         }
-        this.usuarios.add(novoLocatario);
-        return novoLocatario;
+        this.usuarios.add(novoUsuario);
+        return novoUsuario;
     }
 
-    public Funcionario cadastrarFuncionario(Funcionario novoFuncionario) {
-        if (buscarUsuarioPorId(novoFuncionario.getId()).isPresent()) {
-            return null;
-        }
-        this.usuarios.add(novoFuncionario);
-        return novoFuncionario;
-    }
     public Optional<Usuario> buscarUsuarioPorId(String id) {
         return usuarios.stream()
                 .filter(u -> u.getId().equals(id))
@@ -44,4 +34,13 @@ public class GestaoUsuario {
     public boolean removerUsuario(String id) {
         return usuarios.removeIf(usuario -> usuario.getId().equals(id));
     }
+
+    public Optional<Usuario> atualizarSaldoDevedor(String id, double valor) {
+        return buscarUsuarioPorId(id).map(usuario -> {
+            usuario.setSaldoDevedor(usuario.getSaldoDevedor() + valor);
+            usuario.setInadimplente(usuario.getSaldoDevedor() > 0);
+            return usuario;
+        });
+    }
+
 }

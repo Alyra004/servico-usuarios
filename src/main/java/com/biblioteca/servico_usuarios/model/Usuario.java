@@ -1,16 +1,39 @@
 package com.biblioteca.servico_usuarios.model;
 
-public abstract class Usuario {
+public class Usuario {
     private String id;
     private String nome;
     private String email;
     private String telefone;
+    private double saldoDevedor;
+    private boolean inadimplente;
+    private TipoUsuario tipo;
 
-    public Usuario(String id, String nome, String email, String telefone) {
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-        this.telefone = telefone;
+    public Usuario() {
+    }
+
+    public double getSaldoDevedor() {
+        return saldoDevedor;
+    }
+
+    public void setSaldoDevedor(double saldoDevedor) {
+        this.saldoDevedor = saldoDevedor;
+    }
+
+    public boolean isInadimplente() {
+        return inadimplente;
+    }
+
+    public void setInadimplente(boolean inadimplente) {
+        this.inadimplente = inadimplente;
+    }
+
+    public TipoUsuario getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoUsuario tipo) {
+        this.tipo = tipo;
     }
 
     public boolean verificarInadiplencia() {
