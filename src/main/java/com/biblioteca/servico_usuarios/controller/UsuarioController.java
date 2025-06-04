@@ -31,14 +31,13 @@ public class UsuarioController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // Endpoint de cadastro unificado
     @PostMapping
     public ResponseEntity<Usuario> cadastrarUsuario(@RequestBody Usuario usuario) {
         Usuario novoUsuario = gestaoUsuario.cadastrarUsuario(usuario);
         if (novoUsuario != null) {
             return ResponseEntity.status(HttpStatus.CREATED).body(novoUsuario);
         }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null); // ID já existe
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }
     
     @DeleteMapping("/{id}")
