@@ -48,7 +48,6 @@ public class UsuarioController {
         return ResponseEntity.notFound().build();
     }
     
-    // O novo endpoint para atualizar saldo
     @PatchMapping("/{id}/saldo")
     public ResponseEntity<Usuario> atualizarSaldoDevedor(@PathVariable String id, @RequestBody Map<String, Double> updates) {
         Double valor = updates.get("valor");
@@ -60,4 +59,15 @@ public class UsuarioController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
+    @GetMapping("/{id}/inadimplencia")
+    public ResponseEntity<Map<String, Boolean>> checarInadimplencia(@PathVariable String id) {
+    Optional<Boolean> isInadimplenteOpt = gestaoUsuario.verificarInadimplenciaPorId(id);
+
+    if (isInadimplenteOpt.isPresent()) {
+        return ResponseEntity.ok(Map.of("inadimplente", isInadimplenteOpt.get()));
+    } else {
+        return ResponseEntity.notFound().build();
+    }
+}
 }

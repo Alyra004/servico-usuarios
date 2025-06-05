@@ -43,4 +43,8 @@ public class GestaoUsuario {
         });
     }
 
+    public Optional<Boolean> verificarInadimplenciaPorId(String id) {
+    return buscarUsuarioPorId(id).map(Usuario::isInadimplente);
+    }
+
 }
