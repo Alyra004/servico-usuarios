@@ -1,7 +1,7 @@
 package com.biblioteca.servico_usuarios.service;
 
 import com.biblioteca.servico_usuarios.model.Usuario;
-import com.biblioteca.servico_usuarios.repository.UsuarioRepository; // Importe o novo repo
+import com.biblioteca.servico_usuarios.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
