@@ -1,50 +1,49 @@
 package com.biblioteca.servico_usuarios.service;
 
+import com.biblioteca.servico_usuarios.model.Usuario;
+import com.biblioteca.servico_usuarios.repository.UsuarioRepository; // Importe o novo repo
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.biblioteca.servico_usuarios.model.Usuario;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class GestaoUsuario {
 
-    private final List<Usuario> usuarios = new ArrayList<>();
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
 
     public Usuario cadastrarUsuario(Usuario novoUsuario) {
-        if(buscarUsuarioPorId(novoUsuario.getId()).isPresent()){
-            return null;
-        }
-        this.usuarios.add(novoUsuario);
-        return novoUsuario;
-    }
-
-    public Optional<Usuario> buscarUsuarioPorId(String id) {
-        return usuarios.stream()
-                .filter(u -> u.getId().equals(id))
-                .findFirst();
+        return usuarioRepository.save(novoUsuario);
     }
 
     public List<Usuario> listarTodosUsuarios() {
-        return this.usuarios;
+        return usuarioRepository.findAll();
     }
 
+    public Optional<Usuario> buscarUsuarioPorId(String id) {
+        return usuarioRepository.findById(id);
+    }
+    
     public boolean removerUsuario(String id) {
-        return usuarios.removeIf(usuario -> usuario.getId().equals(id));
+        if (usuarioRepository.existsById(id)) {
+            usuarioRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 
     public Optional<Usuario> atualizarSaldoDevedor(String id, double valor) {
-        return buscarUsuarioPorId(id).map(usuario -> {
+        return usuarioRepository.findById(id).map(usuario -> {
             usuario.setSaldoDevedor(usuario.getSaldoDevedor() + valor);
             usuario.setInadimplente(usuario.getSaldoDevedor() > 0);
-            return usuario;
+            return usuarioRepository.save(usuario);
         });
     }
 
     public Optional<Boolean> verificarInadimplenciaPorId(String id) {
-    return buscarUsuarioPorId(id).map(Usuario::isInadimplente);
+        return usuarioRepository.findById(id).map(Usuario::isInadimplente);
     }
-
 }
